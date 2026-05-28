@@ -2,6 +2,7 @@ import express from "express";
 import UserMiddleware from "../middlewares/usermiddleware.js";
 import {AccountModel} from "../db.js"
 import mongoose from "mongoose";
+import connectdb from "../connectdb.js";
 
 const router = express.Router();
 

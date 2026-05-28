@@ -13,9 +13,6 @@ import JWT_SECRET from "../config.js";
 const router  = express.Router();
 
 
-
-
-
 router.post("/signup", async (req,res)=>{
     
     try {
@@ -94,11 +91,6 @@ router.post("/signin", async (req,res)=>{
 
       try {
             await connectdb();
-            
-            
-
-        
-
 
     const UserDetails = zod.object({
         email : zod.string().email().min(1),
