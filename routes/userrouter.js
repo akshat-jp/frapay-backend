@@ -5,6 +5,7 @@ import {UserModel} from "../db.js";
 import {AccountModel} from "../db.js";
 import jwt from "jsonwebtoken"
 import UserMiddleware from "../middlewares/usermiddleware.js"
+import connectdb from "../connectdb.js";
 
 
 import JWT_SECRET from "../config.js";
@@ -13,7 +14,10 @@ const router  = express.Router();
 
 
 
+
+
 router.post("/signup", async (req,res)=>{
+    await connectdb();
     const UserDetails = zod.object({
         email: zod.string().email(),
         password: zod.string().min(6),

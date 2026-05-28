@@ -1,7 +1,7 @@
 import mongoose, { Schema, ObjectId } from "mongoose";
-import connectdb from "./connectdb";
+import connectdb from "./connectdb.js";
 
-connectdb();
+
 
 const UserSchema = new mongoose.Schema({
     email: {
