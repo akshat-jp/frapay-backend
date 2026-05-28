@@ -1,14 +1,5 @@
 import mongoose, { Schema, ObjectId } from "mongoose";
-
-
-async function connectdb() {
-    try {
-        await mongoose.connect("mongodb+srv://kaalaananoob_db_user:dHW9h4Uaw2r4ngCM@cluster0.x18ahaa.mongodb.net/");
-        console.log("server connected");
-    } catch (err) {
-        console.log("connection failed");
-    }
-}
+import connectdb from "./connectdb";
 
 connectdb();
 
