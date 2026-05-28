@@ -91,6 +91,15 @@ router.post("/signup", async (req,res)=>{
 })
 
 router.post("/signin", async (req,res)=>{
+
+      try {
+            await connectdb();
+            
+            
+
+        
+
+
     const UserDetails = zod.object({
         email : zod.string().email().min(1),
         password : zod.string().min(6),
@@ -129,9 +138,18 @@ router.post("/signin", async (req,res)=>{
         msg : "User Signed In Successfully",
         token : token,
     })
+
+    } catch (err) {
+            console.error("Signup error:", err.message); // ← this will show in Vercel logs
+            return res.status(500).json({ msg: err.message });
+        }
 })
 
 router.get("/bulk", UserMiddleware, async (req, res) => {
+
+      try {
+    await connectdb();
+
   try {
     let { filter } = req.query;
 
@@ -156,16 +174,30 @@ router.get("/bulk", UserMiddleware, async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
+
+    } catch (err) {
+    console.error("Signup error:", err.message); // ← this will show in Vercel logs
+    return res.status(500).json({ msg: err.message });
+  }
 });
 
 router.get("/me", UserMiddleware, async (req,res)=>{
+
+      try {
+    await connectdb();
+    
     const user = await UserModel.findById(req.userId);
 
     res.json(user)
+
+      } catch (err) {
+    console.error("Signup error:", err.message); // ← this will show in Vercel logs
+    return res.status(500).json({ msg: err.message });
+  }
 })
 
 router.post("update",(req,res)=>{
-    
+    //no use...
 })
 
 export default router;

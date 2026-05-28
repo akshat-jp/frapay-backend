@@ -6,6 +6,10 @@ import mongoose from "mongoose";
 const router = express.Router();
 
 router.get("/balance", UserMiddleware, async (req, res) => {
+
+      try {
+    await connectdb();
+    
     const account = await AccountModel.findOne({
         userId: req.userId
     })
@@ -13,9 +17,17 @@ router.get("/balance", UserMiddleware, async (req, res) => {
     res.json({
         balance: account.balance
     })
+      } catch (err) {
+    console.error("Signup error:", err.message); // ← this will show in Vercel logs
+    return res.status(500).json({ msg: err.message });
+  }
 })
 
 router.post("/transfer", UserMiddleware, async (req, res) => {
+
+      try {
+    await connectdb();
+    
     const session = await mongoose.startSession();
     session.startTransaction();
 
@@ -62,6 +74,11 @@ router.post("/transfer", UserMiddleware, async (req, res) => {
     } finally {
         session.endSession();
     }
+
+     } catch (err) {
+    console.error("Signup error:", err.message); // ← this will show in Vercel logs
+    return res.status(500).json({ msg: err.message });
+  }
 });
 
 export default router;
