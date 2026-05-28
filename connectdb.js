@@ -1,4 +1,7 @@
 import mongoose from "mongoose";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 let isConnected = false;
 
@@ -6,7 +9,7 @@ const connectdb = async () => {
   if (isConnected) return;
 
   try {
-    const db = await mongoose.connect(process.env.MONGwODB_URI, {
+    const db = await mongoose.connect(process.env.MONGODB_URI, {
       serverSelectionTimeoutMS: 5000, 
     });
 

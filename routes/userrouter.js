@@ -1,6 +1,5 @@
-import Router from "router";
 import express from "express";
-import zod, { email } from "zod";
+import zod from "zod";
 import {UserModel} from "../db.js";
 import {AccountModel} from "../db.js";
 import jwt from "jsonwebtoken"
