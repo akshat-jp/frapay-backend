@@ -17,7 +17,14 @@ const router  = express.Router();
 
 
 router.post("/signup", async (req,res)=>{
+    
+    try {
     await connectdb();
+            
+            // ... your existing code ...
+
+        
+
     const UserDetails = zod.object({
         email: zod.string().email(),
         password: zod.string().min(6),
@@ -75,6 +82,11 @@ router.post("/signup", async (req,res)=>{
         msg : "User Signed In Successfully",
         balance : newaccount.balance
     })
+
+    } catch (err) {
+            console.error("Signup error:", err.message); // ← this will show in Vercel logs
+            return res.status(500).json({ msg: err.message });
+        }
 
 })
 
